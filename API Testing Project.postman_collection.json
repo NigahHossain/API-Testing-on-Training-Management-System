@@ -1,0 +1,669 @@
+{
+	"info": {
+		"_postman_id": "ec02403a-89b8-427b-8512-2c4adf1ac944",
+		"name": "API Testing Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26807123"
+	},
+	"item": [
+		{
+			"name": "User controller",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201 for successful registration\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Admin token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "hasnain.hossain@gmail.comfgvbfdbv3rt34rt34gecvfdvekjncjhwdbcnu2he982cjoidjdfnvliefjv903if9eifierjvi",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "Hasnain",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Hossain",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Male",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345!w$gy&_£8wudq87d67yiu$%*&*((",
+									"type": "text"
+								},
+								{
+									"key": "phoneNo",
+									"value": "01782890346hkswskkjnjshdcs9823929kdmfcwicjiuwjcuiscjscdkmc4r43f3rfrvgrvrevereverwiujefdwiuf92020442vdfvdbfgb fgbfgbfb fgbfgbfrtge5t45t45t54htbhgnbghnbghnhngfgbgbgf",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/C:/Users/bjit/Desktop/Projects/API+Jmeter/Images/download.jpeg"
+								},
+								{
+									"key": "role",
+									"value": "Admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/registerUser",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"registerUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Admin token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/user/get-all-users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"get-all-users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth controller",
+			"item": [
+				{
+					"name": "Admin Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var token = jsonData['access_token'];\r",
+									"pm.environment.set(\"Admin token\", jsonData.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin\",\r\n    \"cgpa\" : 3.87,\r\n    \"Gender\" : \"Female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trainee Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var token = jsonData['access_token'];\r",
+									"pm.environment.set(\"Trainee token\", jsonData.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"nigah.hossain@bjitacademy.com\",\r\n    \"password\" : \"12345678@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trainer Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var token = jsonData['access_token'];\r",
+									"pm.environment.set(\"Trainer token\", jsonData.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"mushfira@bjitacademy.com\",\r\n    \"password\" : \"12345!wer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Batch controller",
+			"item": [
+				{
+					"name": "Create batch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Trainer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"batchName\": \"SQA-NEW-BATCH02\",\r\n  \"startTime\": \"2023-10-01\",\r\n  \"endTime\": \"2023-10-31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/batch/create-batch",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"batch",
+								"create-batch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign trainees to batch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Admin token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"traineeEmail\": \"nigah.hossain@bjitacademy.com\",\r\n    \"batchName\": \"YSD-SQA-B02\"\r\n  },\r\n\r\n  {\r\n    \"traineeEmail\": \"nigah.hossain@gmail.com\",\r\n    \"batchName\": \"SQA-New-batch02\"\r\n  },\r\n\r\n  {\r\n    \"traineeEmail\": \"rushmia.hossain@gmail.com\",\r\n    \"batchName\": \"SQA-New-batch02\"\r\n  },\r\n\r\n  {\r\n    \"traineeEmail\": \"rushmia.hossain@gmail.com\",\r\n    \"batchName\": \"SQA-New-batch06\"\r\n  }\r\n  \r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/batch/assign-trainees-to-batch",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"batch",
+								"assign-trainees-to-batch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course controller",
+			"item": [
+				{
+					"name": "Create Course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Admin token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"courseName\": \"SQA Basic 08\",\r\n  \"courseDescription\": \"SQA related theory and project\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/course/create-course",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"course",
+								"create-course"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Schedule controller",
+			"item": [
+				{
+					"name": "Create schedule",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Admin token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"scheduleName\":\"New SQA schedule 09\",\r\n\"startTime\":\"2030-05-01T12:00:00\",\r\n\"endTime\":\"2030-07-14T12:00:00\",\r\n\"courseTitle\":\"SQA Advanced\",\r\n\"batchName\":[\"SQA-NEW-BATCH09\"],\r\n\"trainerEmail\":\"rushmia.murshida@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/schedules/create-schedule",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"schedules",
+								"create-schedule"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Classroom controller",
+			"item": [
+				{
+					"name": "Create attachments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Trainer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "message",
+									"value": "I have created this classroom to keep you updated about your works.",
+									"type": "text"
+								},
+								{
+									"key": "fileName",
+									"type": "file",
+									"src": "/C:/Users/bjit/Desktop/Projects/API+Jmeter/Images/Create assignment.PNG"
+								},
+								{
+									"key": "trainerEmail",
+									"value": "rushmia.murshida@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "classroomId",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/classroom/create-attachments",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"classroom",
+								"create-attachments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create notice",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Trainer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"notice\": \"I have extended the deadline. Please complete by then.\",\r\n  \"classroomId\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/classroom/create-notice",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"classroom",
+								"create-notice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create reply",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Trainer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reply\": \"I have completed my assignment.\",\r\n  \"attachmentId\": \"8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/classroom/create-reply",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"classroom",
+								"create-reply"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
